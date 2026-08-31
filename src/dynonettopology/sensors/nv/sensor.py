@@ -1,4 +1,4 @@
-```python
+
 """NV-center sensor model."""
 
 from __future__ import annotations
