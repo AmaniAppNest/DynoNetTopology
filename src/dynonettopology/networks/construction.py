@@ -26,6 +26,11 @@ def correlation_adjacency(
     numpy.ndarray
         Symmetric adjacency matrix with shape
         ``(n_nodes, n_nodes)``.
+
+    Notes
+    -----
+    Constant sensor signals have undefined Pearson correlation.
+    Those correlations are represented as zero rather than NaN.
     """
 
     measurements = np.asarray(
@@ -62,6 +67,15 @@ def correlation_adjacency(
         rowvar=False,
     )
 
+    # Pearson correlation is undefined for constant signals.
+    # Replace undefined correlations with zero interaction.
+    adjacency = np.nan_to_num(
+        adjacency,
+        nan=0.0,
+        posinf=0.0,
+        neginf=0.0,
+    )
+
     if absolute:
         adjacency = np.abs(adjacency)
 
@@ -95,6 +109,20 @@ def threshold_adjacency(
     ):
         raise ValueError(
             "adjacency must be square."
+        )
+
+    if not np.all(
+        np.isfinite(adjacency)
+    ):
+        raise ValueError(
+            "adjacency must contain finite values."
+        )
+
+    threshold = float(threshold)
+
+    if not np.isfinite(threshold):
+        raise ValueError(
+            "threshold must be finite."
         )
 
     if threshold < 0:
