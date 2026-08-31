@@ -1,3 +1,4 @@
+```python
 """NV-center sensor model."""
 
 from __future__ import annotations
@@ -7,6 +8,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from .hamiltonian import NVHamiltonian
+from .noise import NoiseModel
 
 
 @dataclass
@@ -16,6 +18,7 @@ class NVSensor:
     position: np.ndarray
     orientation: np.ndarray
     hamiltonian: NVHamiltonian | None = None
+    noise_model: NoiseModel | None = None
 
     def __post_init__(self) -> None:
         """Validate sensor geometry and configure the Hamiltonian."""
@@ -98,14 +101,18 @@ class NVSensor:
         self,
         magnetic_field: np.ndarray,
     ) -> float:
-        """Return a simplified quantum-sensitive measurement.
+        """Return a simulated sensor measurement."""
 
-        The current measurement is the field projection along
-        the NV axis. The Hamiltonian is evaluated as part of
-        the quantum-sensing model and is available through
-        ``energy_levels``.
-        """
-
-        return self.project_field(
+        ideal_signal = self.project_field(
             magnetic_field
         )
+
+        if self.noise_model is None:
+            return ideal_signal
+
+        noisy_signal = self.noise_model.apply(
+            np.asarray([ideal_signal])
+        )
+
+        return float(noisy_signal[0])
+```
