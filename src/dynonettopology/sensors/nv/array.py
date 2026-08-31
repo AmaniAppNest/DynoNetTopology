@@ -120,11 +120,12 @@ class NVSensoryArray:
                 [0.0, 0.0, 1.0],
                 dtype=float,
             )
-sensors.append(
-    NVSensor(
-        position=position,
-        orientation=orientation,
-    )
-)
+
+            sensors.append(
+                NVSensor(
+                    position=position,
+                    orientation=orientation,
+                )
+            )
 
         return cls(sensors=sensors)
