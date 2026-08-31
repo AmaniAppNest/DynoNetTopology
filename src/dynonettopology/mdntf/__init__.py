@@ -1,9 +1,7 @@
 """Multiscale Dynamic Network–Topology Framework."""
 
-from .complexes import (
-    SimplicialComplex,
-    clique_complex,
-)
+from .complexes import SimplicialComplex, clique_complex
+from .engine import MDNTFEngine, MDNTFResult
 from .filtration import (
     FiltrationLevel,
     NetworkFiltration,
@@ -23,6 +21,8 @@ __all__ = [
     "FeatureTracker",
     "FeatureTrajectory",
     "FiltrationLevel",
+    "MDNTFEngine",
+    "MDNTFResult",
     "NetworkFiltration",
     "PersistenceResult",
     "SimplicialComplex",
