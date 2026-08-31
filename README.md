@@ -209,6 +209,8 @@ where appropriate.
 The objective is not only to calculate these quantities at individual time points, but to study how topological structures **appear, evolve, persist, merge, split, and disappear**.
 
 ---
+<img width="1513" height="807" alt="image" src="https://github.com/user-attachments/assets/d04db74c-95ba-4491-a2ae-31d447680ee2" />
+Figure 1. Example implementation of the MDNTF for brain dynamics, from EEG/fMRI input through dynamic network and topological analysis to the resulting digital map, with optional physics-informed RL integration.
 
 # 6. Final Output — The Digital Map
 
