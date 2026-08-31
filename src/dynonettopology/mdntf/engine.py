@@ -8,7 +8,10 @@ import numpy as np
 
 from .complexes import clique_complex
 from .filtration import create_filtration
-from .persistence import PersistenceResult, compute_persistence
+from .persistence import (
+    PersistenceResult,
+    compute_persistence,
+)
 from .tracker import (
     FeatureTracker,
     TopologicalFeature,
@@ -46,6 +49,22 @@ class MDNTFEngine:
                 "At least one threshold is required."
             )
 
+        if not np.all(
+            np.isfinite(self.thresholds)
+        ):
+            raise ValueError(
+                "thresholds must contain finite values."
+            )
+
+        if np.any(self.thresholds < 0):
+            raise ValueError(
+                "thresholds must be non-negative."
+            )
+
+        self.thresholds = np.sort(
+            self.thresholds
+        )
+
         self.max_dimension = int(
             max_dimension
         )
@@ -62,6 +81,38 @@ class MDNTFEngine:
     ) -> MDNTFResult:
         """Analyze one network state across filtration scales."""
 
+        adjacency = np.asarray(
+            adjacency,
+            dtype=float,
+        )
+
+        if adjacency.ndim != 2:
+            raise ValueError(
+                "adjacency must be two-dimensional."
+            )
+
+        if (
+            adjacency.shape[0]
+            != adjacency.shape[1]
+        ):
+            raise ValueError(
+                "adjacency must be square."
+            )
+
+        if not np.all(
+            np.isfinite(adjacency)
+        ):
+            raise ValueError(
+                "adjacency must contain finite values."
+            )
+
+        time = float(time)
+
+        if not np.isfinite(time):
+            raise ValueError(
+                "time must be finite."
+            )
+
         filtration = create_filtration(
             adjacency,
             self.thresholds,
@@ -73,16 +124,19 @@ class MDNTFEngine:
 
         tracker = FeatureTracker()
 
-        for level, filtered_adjacency in zip(
-            filtration.levels,
-            filtration.all_levels(),
-        ):
+        for level in filtration.levels:
+            filtered_adjacency = filtration.apply(
+                level
+            )
+
             complex_ = clique_complex(
                 filtered_adjacency,
                 max_dimension=self.max_dimension,
             )
 
-            simplex_filtration = []
+            simplex_filtration: list[
+                tuple[tuple[int, ...], float]
+            ] = []
 
             for dimension, simplices in (
                 complex_.simplices.items()
@@ -112,7 +166,7 @@ class MDNTFEngine:
                 for birth, death in intervals:
                     tracker.create_trajectory(
                         TopologicalFeature(
-                            time=float(time),
+                            time=time,
                             dimension=dimension,
                             birth=birth,
                             death=death,
