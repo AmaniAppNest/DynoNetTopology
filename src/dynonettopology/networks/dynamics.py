@@ -66,7 +66,7 @@ class DynamicNetwork:
     states: list[NetworkState]
 
     def __post_init__(self) -> None:
-        """Validate temporal ordering."""
+        """Validate temporal ordering and node consistency."""
 
         if not self.states:
             raise ValueError(
@@ -81,6 +81,17 @@ class DynamicNetwork:
         if times != sorted(times):
             raise ValueError(
                 "Network states must be ordered by time."
+            )
+
+        node_counts = [
+            state.n_nodes
+            for state in self.states
+        ]
+
+        if len(set(node_counts)) != 1:
+            raise ValueError(
+                "All network states must have the same "
+                "number of nodes."
             )
 
     @property
