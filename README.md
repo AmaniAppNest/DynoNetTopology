@@ -468,13 +468,13 @@ Develop the final analytical visualization layer.
 ```text
 DIGITAL MAP
 ``
-The following figure illustrates an example implementation of the MDNTF analytical workflow using brain-dynamics data. It demonstrates the network, temporal, topological, and digital-map layers independently of the quantum-sensing layer.`
----
-<img width="1513" height="807" alt="image" src="https://github.com/user-attachments/assets/89d4393c-cfd0-4395-8003-088307ca3a7b" />
-
-Figure 1. **Figure 1.** Example implementation of the MDNTF for brain dynamics, from EEG/fMRI input through dynamic network and topological analysis to the resulting digital map, with optional physics-informed RL integration.
+##The following figure illustrates an example implementation of the MDNTF analytical workflow using brain-dynamics data. It demonstrates the network, temporal, topological, and digital-map layers independently of the quantum-sensing layer.`
 ---
 
+<img width="1513" height="807" alt="image" src="https://github.com/user-attachments/assets/e8a7131b-8b3b-4b7c-94be-983ec2dbde59" />
+
+
+##Figure 1. **Figure 1.** Example implementation of the MDNTF for brain dynamics, from EEG/fMRI input through dynamic network and topological analysis to the resulting digital map, with optional physics-informed RL integration.
 ## Stage 7 — Integration and Validation
 
 Connect all modules into a complete end-to-end pipeline.
