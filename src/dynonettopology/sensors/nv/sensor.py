@@ -1,4 +1,4 @@
-"""NV-center sensor abstraction."""
+"""NV-center sensor model."""
 
 from __future__ import annotations
 
@@ -6,25 +6,19 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from .hamiltonian import NVHamiltonian
+
 
 @dataclass
 class NVSensor:
-    """Representation of a single NV-center sensor.
-
-    Parameters
-    ----------
-    position:
-        Sensor position in Cartesian coordinates ``(x, y, z)``.
-
-    orientation:
-        NV quantization-axis orientation as a three-dimensional vector.
-    """
+    """Representation of a single NV-center sensor."""
 
     position: np.ndarray
     orientation: np.ndarray
+    hamiltonian: NVHamiltonian | None = None
 
     def __post_init__(self) -> None:
-        """Validate sensor geometry."""
+        """Validate sensor geometry and configure the Hamiltonian."""
 
         self.position = np.asarray(
             self.position,
@@ -46,7 +40,9 @@ class NVSensor:
                 "orientation must have shape (3,)."
             )
 
-        norm = np.linalg.norm(self.orientation)
+        norm = np.linalg.norm(
+            self.orientation
+        )
 
         if norm == 0:
             raise ValueError(
@@ -56,6 +52,9 @@ class NVSensor:
         self.orientation = (
             self.orientation / norm
         )
+
+        if self.hamiltonian is None:
+            self.hamiltonian = NVHamiltonian()
 
     def project_field(
         self,
@@ -78,4 +77,35 @@ class NVSensor:
                 magnetic_field,
                 self.orientation,
             )
+        )
+
+    def energy_levels(
+        self,
+        magnetic_field: np.ndarray,
+    ) -> np.ndarray:
+        """Calculate field-dependent NV energy levels."""
+
+        if self.hamiltonian is None:
+            raise RuntimeError(
+                "NV Hamiltonian is not configured."
+            )
+
+        return self.hamiltonian.eigenvalues(
+            magnetic_field
+        )
+
+    def measure(
+        self,
+        magnetic_field: np.ndarray,
+    ) -> float:
+        """Return a simplified quantum-sensitive measurement.
+
+        The current measurement is the field projection along
+        the NV axis. The Hamiltonian is evaluated as part of
+        the quantum-sensing model and is available through
+        ``energy_levels``.
+        """
+
+        return self.project_field(
+            magnetic_field
         )
