@@ -4,7 +4,17 @@
 
 DynoNetTopology is a computational physics framework for connecting the dynamics of complex physical and biological systems with quantum-sensing models, dynamic network analysis, and multiscale topological analysis.
 
-The framework is organized as a modular pipeline:
+## Executable Example
+
+A concrete implementation is provided in [`examples/brain_nv_pipeline.py`](examples/brain_nv_pipeline.py).
+
+The example demonstrates the connection between NV-center sensing, simulated
+measurements, dynamic network construction, and Digital Map generation.
+
+See [`examples/README.md`](examples/README.md) for the methodological explanation
+and interpretation of the example.
+
+## The framework is organized as a modular pipeline:
 
 ```text
 Physical / Biological System
