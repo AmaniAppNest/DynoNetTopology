@@ -1,4 +1,4 @@
-# Example: Dynamic Brain Network + NV Sensing Pipeline
+# Example: Dynamic Brain Network + NV Sensing Pipeline 
 
 This directory contains an **executable computational-physics demonstration** of the DynoNetTopology framework.
 
