@@ -1,58 +1,82 @@
 # Example: Dynamic Brain Network + NV Sensing Pipeline
 
-This example demonstrates how the DynoNetTopology framework can connect a dynamic physical/sensing process to an evolving interaction network.
+This directory contains an **executable computational-physics demonstration** of the DynoNetTopology framework.
 
-The example is intentionally designed as a **computational-physics prototype**, not as a clinical neuroscience model.
+The example uses a synthetic brain-inspired dynamic system to demonstrate how a time-dependent physical/sensing process can be converted into an evolving interaction network and connected to the **MDNTF (Multiscale Dynamic Network–Topology Framework)** methodology.
 
-## What this example demonstrates
+> **Important:** This is an independent computational-physics research prototype. The brain example is synthetic and is **not a clinical neuroscience model, diagnostic system, or validated representation of human brain activity.**
 
-The executable pipeline combines:
+---
+
+## 1. What is implemented
+
+The current executable example demonstrates the following computational pipeline:
 
 ```text
-Dynamic / synthetic system
-        ↓
-Magnetic-field model
-        ↓
-NV-center sensor array
-        ↓
-Simulated sensor measurements
-        ↓
-Dynamic interaction network
-        ↓
-Network states through time
-        ↓
-Digital Map representation
+Synthetic Dynamic System
+          ↓
+Time-dependent Physical State
+          ↓
+Magnetic-field Model
+          ↓
+NV-center Sensor Model
+          ↓
+NV Sensor Array
+          ↓
+Simulated Measurements
+          ↓
+Dynamic Interaction Network A(t)
+          ↓
+Network States Through Time
+          ↓
+Digital Map Representation
 ```
 
-The implementation demonstrates the connection between the **quantum-sensing layer** and the **dynamic-network layer** of DynoNetTopology.
+The implementation therefore provides a concrete connection between:
 
-The brain-dynamics context is used because it provides a natural example of a system whose interactions evolve in time. The same analytical architecture can be applied to other physical, biological, or engineered systems.
+**physical simulation → quantum sensing → measurements → dynamic networks**
 
-## MDNTF analytical methodology
+This is the executable foundation on which the broader MDNTF topological analysis can be developed.
 
-The central methodological idea is to treat an evolving physical or measured system as a **time-dependent network** and analyze its structure across multiple scales:
+---
+
+# 2. The central MDNTF idea
+
+The main methodological idea of DynoNetTopology is not simply to analyze one network snapshot.
+
+Instead, an evolving physical or measured system is represented as a **time-dependent network**:
+
+```text
+A(t₁) → A(t₂) → A(t₃) → ... → A(tₙ)
+```
+
+The MDNTF methodology then extends this dynamic network into a multiscale topological representation:
 
 ```text
 Dynamic Network
-        ↓
+       ↓
 Multiscale Filtration
-        ↓
+       ↓
 Simplicial Complexes
-        ↓
+       ↓
 Persistent Homology
-        ↓
+       ↓
 Temporal Feature Alignment
-        ↓
+       ↓
 Topological Feature Trajectories
-        ↓
+       ↓
 Digital Map
 ```
 
-The purpose is not simply to calculate topology independently at each time point.
+This is the central research direction of the framework.
 
-Instead, the framework is designed to follow structural features as the network evolves.
+The important distinction is that topology is not treated only as an independent calculation at each time point. The objective is to study **how topological structures evolve through time and across filtration scale**.
 
-For example, topological features associated with Betti numbers can be studied as functions of time and filtration scale:
+---
+
+# 3. Betti-number representation
+
+For a filtered network, topological quantities can be represented as functions of both time and scale:
 
 ```text
 β₀(t, scale)
@@ -60,137 +84,361 @@ For example, topological features associated with Betti numbers can be studied a
 β₂(t, scale)
 ```
 
-This makes it possible to investigate when structures:
+For example:
+
+* **β₀** describes connected-component structure.
+* **β₁** describes loop/cycle structure.
+* **β₂** describes higher-dimensional void structure when the chosen complex supports it.
+
+The resulting representation can reveal structural transitions that are difficult to describe using a single network snapshot.
+
+The framework is designed to investigate when topological structures:
 
 * appear,
 * persist,
-* disappear,
+* evolve,
 * merge,
 * split,
+* disappear,
 * or change across scales.
 
-The resulting temporal information can be represented as a **Digital Map** of the evolving system.
+The longer-term objective is to associate these changes with the underlying physical or biological dynamics.
 
-## Why the NV-center layer is important
+---
 
-The NV-center model provides a quantum-sensing interface between a physical field and the computational network.
+# 4. Why the temporal topology is important
+
+A dynamic system can produce networks that look different at different times:
+
+```text
+Time t₁        Time t₂        Time t₃
+  A₁    →        A₂    →        A₃
+```
+
+A conventional snapshot analysis can calculate topology for each network separately.
+
+MDNTF instead asks:
+
+> **How does a topological structure at one time relate to structures appearing later, and how does that structure evolve across analysis scale?**
+
+This motivates the temporal feature-tracking layer:
+
+```text
+Persistent feature
+       │
+       ├── appears
+       ├── evolves
+       ├── persists
+       ├── merges / splits
+       └── disappears
+```
+
+The resulting trajectories can form part of the Digital Map.
+
+This provides a computational representation of **structural dynamics**, rather than only instantaneous structure.
+
+---
+
+# 5. Why the NV-center layer matters
+
+The NV-center component provides a physically motivated quantum-sensing interface.
+
+A time-dependent magnetic field can be passed through an NV-center model:
+
+```text
+B(x,y,z,t)
+      ↓
+NV Hamiltonian
+      ↓
+Spin response
+      ↓
+Measurement / readout model
+      ↓
+Sensor time series
+      ↓
+Dynamic Network
+      ↓
+MDNTF
+```
+
+This creates a computational bridge between:
+
+**magnetic-field dynamics → quantum spin response → measured signals → network dynamics → topology**
+
+The NV layer is therefore **one physical measurement interface for MDNTF**, rather than the definition of MDNTF itself.
+
+The same analytical architecture can accept other physical or experimental inputs.
+
+---
+
+# 6. Brain-dynamics demonstration
+
+The example uses a synthetic brain-inspired system because brain activity provides a natural illustration of a system whose measured relationships change continuously with time.
 
 Conceptually:
 
 ```text
-Physical Dynamics
-        ↓
-B(x,y,z,t)
-        ↓
-NV Hamiltonian / Spin Response
-        ↓
-Sensor Measurements
-        ↓
-Dynamic Network
-        ↓
-MDNTF
+Brain-inspired dynamic system
+            ↓
+Changing signals
+            ↓
+Changing relationships
+            ↓
+Dynamic network
+            ↓
+Multiscale topology
+            ↓
+Temporal topological features
 ```
 
-This creates a general computational route for studying how dynamically changing magnetic-field and spin-related information can be transformed into network-level and topological descriptions.
+The purpose is methodological rather than clinical.
 
-The NV layer is therefore not the definition of MDNTF itself. It is one possible **physical measurement interface** for the MDNTF analytical framework.
+The example can serve as a computational starting point for future work using:
 
-## Brain-dynamics interpretation
+* EEG,
+* fMRI-derived signals,
+* other electrophysiological measurements,
+* multimodal measurements,
+* or simulated brain-physics models.
 
-In this example, the nodes can represent sensing locations or system components, while their measured time series provide the signals from which dynamic relationships are constructed.
+Experimental data could replace the synthetic measurements without changing the basic downstream network/topology architecture.
 
-The resulting network can be interpreted as a simplified representation of changing functional or physical interactions.
+---
 
-This is a **synthetic demonstration** and should not be interpreted as a validated model of human brain activity or as a clinical diagnostic method.
+# 7. Digital Map
 
-The value of the example is methodological:
+The Digital Map is intended to become the integrated representation of the evolving system.
 
-> a dynamically evolving physical or biological system can be represented as a time-dependent network and subsequently analyzed through multiscale topology.
+It can combine:
 
-## Current implementation
+```text
+Physical state
+     +
+Sensor measurements
+     +
+Network structure
+     +
+Time
+     +
+Filtration scale
+     +
+Betti numbers
+     +
+Persistent features
+     +
+Feature lifetimes
+     +
+Topological transitions
+```
 
-The executable example currently demonstrates:
+Conceptually:
 
-* NV-center sensor modelling
+```text
+                 DIGITAL MAP
+                      │
+        ┌─────────────┼─────────────┐
+        ↓             ↓             ↓
+   Physical        Network       Topology
+    Dynamics       Evolution     Evolution
+        │             │             │
+        └─────────────┼─────────────┘
+                      ↓
+              System Interpretation
+```
+
+The Digital Map is therefore intended to connect **physical dynamics with structural and topological dynamics**.
+
+---
+
+# 8. Current executable implementation
+
+The current example implements the computational front end of this methodology.
+
+### Implemented
+
+* Synthetic dynamic-system generation
+* Time-dependent physical representation
+* Magnetic-field modelling
+* NV-center modelling
 * NV Hamiltonian / spin-related modelling
-* sensor-array simulation
-* simulated measurements
-* dynamic interaction-network construction
-* multiple network states through time
+* NV sensor-array simulation
+* Simulated sensor measurements
+* Dynamic interaction-network construction
+* Time-dependent network-state generation
 * Digital Map generation
 
-Run:
+Run the example from the repository root:
 
 ```bash
 python examples/brain_nv_pipeline.py
 ```
 
-The current prototype produces output showing the simulated measurement dimensions, number of network states, and Digital Map snapshots.
-
-## Research extensions
-
-The following components represent the next analytical extensions of the framework:
-
-* persistent-homology computation over filtered network states
-* temporal alignment of persistent features
-* feature lifetime and trajectory analysis
-* richer Digital Map visualization
-* coupling to experimental brain-imaging or electrophysiological data
-* finite-element or other physics-based field simulations
-* physics-informed reinforcement learning where appropriate
-
-These extensions are intended to build on the same modular architecture rather than replace it.
-
-## Broader computational-physics application
-
-Although the example uses a brain-inspired system, the framework is deliberately domain-independent.
-
-The same architecture can be used with:
+The current execution produces:
 
 ```text
-Magnetic / spin systems
+Sensor measurements: (21, 8)
+Network states: 20
+Digital Map snapshots: 20
+```
+
+These outputs demonstrate that the physical/sensing-to-dynamic-network pipeline is executable.
+
+---
+
+# 9. MDNTF analytical layer and next development
+
+The executable prototype provides the sensing and dynamic-network foundation.
+
+The next analytical layer is:
+
+```text
+Dynamic Network
+       ↓
+Multiscale Filtration
+       ↓
+Simplicial Complexes
+       ↓
+Persistent Homology
+       ↓
+Temporal Feature Alignment
+       ↓
+Topological Feature Trajectories
+       ↓
+Digital Map
+```
+
+This layer is the principal research direction of MDNTF.
+
+Future implementation can include:
+
+* persistent-homology computation over filtered network states,
+* Betti-number profiles across time and scale,
+* temporal alignment of persistent features,
+* feature lifetime estimation,
+* topological trajectory tracking,
+* richer Digital Map visualization,
+* comparison with experimental brain data,
+* and validation against domain-specific physical models.
+
+The architecture is deliberately modular so that these components can be added without redesigning the NV sensing or dynamic-network layers.
+
+---
+
+# 10. Beyond brain dynamics
+
+The brain example is only one demonstration domain.
+
+The same methodology can be applied to other dynamic physical systems.
+
+### Quantum / magnetic systems
+
+```text
+Magnetic-field dynamics
         ↓
 NV sensing
         ↓
 Dynamic network
         ↓
-Multiscale topology
+MDNTF
+        ↓
+Topological evolution
 ```
 
-or:
+### Physics-based simulation
 
 ```text
-Finite-element physical simulation
+Finite-element / multiphysics simulation
         ↓
 Field evolution
         ↓
-Sensors / observables
+Observables / sensors
         ↓
 Dynamic network
         ↓
 MDNTF
 ```
 
-or:
+### Biological or medical systems
 
 ```text
-Biological / medical system
+Biological dynamics
         ↓
-Experimental measurements
+Experimental or simulated measurements
         ↓
 Dynamic network
         ↓
-Topological evolution
+Multiscale topology
         ↓
 Digital Map
 ```
 
-The central contribution is therefore the **methodological connection between dynamic physical measurements, evolving networks, and multiscale temporal topology**.
+This makes the framework potentially useful as a **general computational methodology for dynamic complex systems**, rather than a brain-specific model.
 
 ---
 
-### Relationship to the main repository
+# 11. Physics-informed simulation and reinforcement learning
 
-The main `README.md` describes the overall DynoNetTopology architecture.
+The architecture can also be extended with physics-informed simulation or reinforcement learning.
 
-This directory provides an executable demonstration of one concrete application path through that architecture.
+For example:
+
+```text
+Physical Model
+      ↓
+Dynamic Simulation
+      ↓
+Dynamic Network
+      ↓
+MDNTF / Topological State
+      ↓
+State Representation
+      ↓
+Physics-informed RL
+      ↓
+Prediction / Control / Optimization
+```
+
+This is an optional research extension and is **not claimed to be a fully implemented RL system in the current example**.
+
+---
+
+# 12. Scientific objective
+
+The broader objective of DynoNetTopology is to establish a computational connection between:
+
+**dynamic physical systems → sensing → evolving networks → multiscale topology → temporal structural information**
+
+The key methodological question is:
+
+> **Can the evolution of a physical or biological system be represented and analyzed through the evolution of its network topology across time and scale?**
+
+For quantum sensing, the framework additionally asks whether dynamically measured magnetic-field and spin-related information can be transformed into network and topological representations that provide higher-level descriptions of system evolution.
+
+---
+
+# 13. Status
+
+DynoNetTopology is an **independent computational-physics research prototype** developed from experience in computational modelling and quantum-sensing-related research.
+
+It is intended to demonstrate:
+
+1. a reusable computational architecture,
+2. an executable NV-centre sensing and dynamic-network prototype,
+3. the MDNTF methodology for dynamic multiscale topology,
+4. and a research direction that can be extended to different physical, biological, and engineered systems.
+
+It is **not presented as a completed scientific publication, clinical system, or experimentally validated medical framework**.
+
+The purpose of this repository is to make the computational architecture concrete, reproducible, inspectable, and extensible.
+
+---
+
+## Running the example
+
+From the repository root:
+
+```bash
+python examples/brain_nv_pipeline.py
+```
+
+The source code is intentionally kept readable so that the individual stages can be inspected and extended.
