@@ -4,6 +4,7 @@
 
 DynoNetTopology is a computational physics framework for connecting the dynamics of complex physical and biological systems with quantum-sensing models, dynamic network analysis, and multiscale topological analysis.
 
+
 ## Executable Example
 
 A concrete implementation is provided in [`examples/brain_nv_pipeline.py`](examples/brain_nv_pipeline.py).
@@ -344,6 +345,8 @@ Power Grid Dynamics
 ```
 
 The architecture therefore separates **domain-specific physical modelling** from the **domain-independent network and topological analysis**.
+That is the heart of your MDNTF idea [Dynamic Network → Multiscale Filtration → Simplicial Complexes → Persistent Homology → Temporal Feature Alignment → Topological Feature Trajectories]
+
 
 ---
 
